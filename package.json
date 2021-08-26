@@ -1,0 +1,17 @@
+{
+  "name": "simulator",
+  "version": "0.0.1",
+  "description": "A discrete event simulator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "simulator",
+    "discrete",
+    "event",
+    "simulation"
+  ],
+  "author": "R.T.H. Chin",
+  "license": "ISC"
+}
