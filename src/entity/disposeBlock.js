@@ -23,7 +23,9 @@ export default class DisposeBlock extends Block {
         super.receiveEntity(entity, channel);
         // To do: keep track of stats before disposing.
         const time = this.simulator.currentTime;
-        console.log('Disposing entity ' + entity.id + ' at ' + time + ', (created at ' + entity.creationTime + ')');
+        console.log('Disposing entity ' + entity.id + ' at ' + time);
+        console.log(' - created:' + entity.creationTime);
+        console.log(' - blocks: ' + entity.blockIDs);
 
         entity.dispose();
     }

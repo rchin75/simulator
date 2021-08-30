@@ -1,5 +1,4 @@
 import Block from "./block.js";
-import Entity from "./entity";
 
 /**
  * A delay-block.
@@ -14,6 +13,7 @@ export default class DelayBlock extends Block {
      */
     constructor(id, simulator, distribution) {
         super(id, simulator);
+        this.initializeOutputChannel(DelayBlock.OUT);
         this.distribution = distribution;
         // Entities in this block.
         this.entities = [];

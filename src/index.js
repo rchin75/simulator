@@ -1,4 +1,4 @@
-import {Simulator} from './simulator.js';
+import Simulator from './simulator.js';
 import './random.js';
 import {triangular} from "./distributions/triangular.js";
 import {normal} from "./distributions/normal.js";

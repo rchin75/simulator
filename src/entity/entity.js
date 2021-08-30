@@ -5,10 +5,10 @@ export default class Entity {
     /**
      * Constructor.
      * @param {string} id ID.
-     * @param {string} type Type.
      * @param {number} creationTime The time of creating this entity.
+     * @param {string} type Type.
      */
-    constructor(id, type = 'default', creationTime) {
+    constructor(id, creationTime, type = 'default') {
         this._id = id;
         this._type = type;
         this._creationTime = creationTime;

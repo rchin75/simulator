@@ -1,9 +1,9 @@
-import {TimeLine} from "./timeline.js";
+import TimeLine from "./timeline.js";
 
 /**
  * The simulator.
  */
-export class Simulator {
+export default class Simulator {
     /**
      * Constructor.
      * @param {number} startTime Start time.

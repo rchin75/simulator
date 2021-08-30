@@ -11,7 +11,7 @@ export const triangular = function(a, b, c, rnd) {
     const f = (c-a) / (b - a);
     return function() {
         let u = rnd();
-        let x = 0;
+        let x;
         if (u < f) {
             x = a + Math.sqrt(u * (b - a) * (c - a));
         } else {

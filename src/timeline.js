@@ -1,7 +1,7 @@
 /**
  * A timeline.
  */
-export class TimeLine {
+export default class TimeLine {
     /**
      * Constructor.
      * @param {number} startTime The start time.
