@@ -6,8 +6,8 @@ import Distribution from "./distribution.js";
 export default class Exponential extends Distribution{
     /**
      * Constructor.
-     * @param lambda Lambda. The mean, or expected value is 1 / lambda.
-     * @param rnd Random number generator.
+     * @param {number} lambda Lambda. The mean, or expected value is 1 / lambda.
+     * @param {Function} rnd Random number generator.
      */
     constructor(lambda, rnd) {
         super(rnd);

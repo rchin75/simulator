@@ -6,9 +6,9 @@ import Distribution from "./distribution.js";
 export default class Normal extends Distribution{
     /**
      * Constructor.
-     * @param mean Mean.
-     * @param stdDev Standard deviation.
-     * @param rnd Random number generator.
+     * @param {number} mean Mean.
+     * @param {number} stdDev Standard deviation.
+     * @param {Function} rnd Random number generator.
      */
     constructor(mean, stdDev, rnd) {
         super(rnd);

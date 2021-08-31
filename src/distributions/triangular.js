@@ -9,7 +9,7 @@ export default class Triangular extends Distribution{
      * @param {number} a Left corner.
      * @param {number} b Right corner.
      * @param {number} c Top corner.
-     * @param rnd Random number generator.
+     * @param {Function} rnd Random number generator.
      */
     constructor(a, b, c, rnd) {
         super(rnd);

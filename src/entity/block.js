@@ -1,3 +1,6 @@
+/**
+ * A block (abstract class).
+ */
 export default class Block {
 
     /** The default input channel/ */

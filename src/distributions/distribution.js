@@ -1,10 +1,10 @@
 /**
- * A default (uniform) distribution.
+ * A distribution (abstract class).
  */
 export default class Distribution {
     /**
      * Constructor.
-     * @param rnd Random number generator.
+     * @param {Function} rnd Random number generator.
      */
     constructor(rnd) {
         if (new.target === Distribution) {
@@ -15,9 +15,9 @@ export default class Distribution {
 
     /**
      * Draws the next random number.
-     * @return {*}
+     * @return {number}
      */
     draw() {
-        return rnd();
+        return this.rnd();
     }
 }

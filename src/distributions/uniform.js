@@ -8,7 +8,7 @@ export default class Uniform extends Distribution{
      * Constructor.
      * @param {number} from The lower boundary.
      * @param {number} to The upper boundary.
-     * @param rnd Random number generator.
+     * @param {Function} rnd Random number generator.
      */
     constructor(from, to, rnd) {
         super(rnd);
