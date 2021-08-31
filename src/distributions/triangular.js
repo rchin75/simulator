@@ -1,21 +1,36 @@
+import Distribution from "./distribution.js";
+
 /**
  * A triangular distribution.
- * @param a Left corner.
- * @param b Right corner.
- * @param c Top corner.
- * @param rnd Random number generator.
- * @return {function(): *}
  */
-export const triangular = function(a, b, c, rnd) {
-    // Source: https://en.wikipedia.org/wiki/Triangular_distribution
-    const f = (c-a) / (b - a);
-    return function() {
-        let u = rnd();
+export default class Triangular extends Distribution{
+    /**
+     * Constructor.
+     * @param {number} a Left corner.
+     * @param {number} b Right corner.
+     * @param {number} c Top corner.
+     * @param rnd Random number generator.
+     */
+    constructor(a, b, c, rnd) {
+        super(rnd);
+        this.a = a;
+        this.b = b;
+        this.c = c;
+        this.f = (c-a) / (b - a);
+    }
+
+    /**
+     * Draws the next random number.
+     * @return {number}
+     */
+    draw() {
+        // Source: https://en.wikipedia.org/wiki/Triangular_distribution
+        let u = this.rnd();
         let x;
-        if (u < f) {
-            x = a + Math.sqrt(u * (b - a) * (c - a));
+        if (u < this.f) {
+            x = this.a + Math.sqrt(u * (this.b - this.a) * (this.c - this.a));
         } else {
-            x = b - Math.sqrt((1 - u) * (b - a) * (b - c));
+            x = this.b - Math.sqrt((1 - u) * (this.b - this.a) * (this.b - this.c));
         }
         return x;
     }

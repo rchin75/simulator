@@ -1,8 +1,8 @@
 import Simulator from './simulator.js';
 import './random.js';
-import {triangular} from "./distributions/triangular.js";
-import {normal} from "./distributions/normal.js";
-import {exponential} from "./distributions/exponential.js";
+import Triangular from "./distributions/triangular.js";
+import Normal from "./distributions/normal.js";
+import Exponential from "./distributions/exponential.js";
 
 const simulator = new Simulator(0,10);
 
@@ -41,9 +41,9 @@ simulator.run( () => {
 
 // Test random.
 const rnd = Math.seed(23);
-const nrm1 = normal(0, 2, rnd);
-const exp1 = exponential(1, rnd);
+const nrm1 = new Normal(0, 2, rnd);
+const exp1 = new Exponential(1, rnd);
 //const tri2 = triangular(-1,1,0, rnd);
 for (let i=0; i<1000; i++) {
-    console.log(exp1());
+    console.log(exp1.draw());
 }

@@ -10,7 +10,7 @@ export default class CreateBlock extends Block {
      * Constructor.
      * @param {string} id ID.
      * @param {Simulator} simulator The simulator.
-     * @param {Function} distribution The distribution function to use.
+     * @param {Distribution} distribution The distribution function to use.
      */
     constructor(id, simulator, distribution) {
         super(id, simulator);
@@ -27,7 +27,7 @@ export default class CreateBlock extends Block {
         if (!this.enabled) {
             return;
         }
-        this.simulator.schedule('Create: ' + this.id, this.distribution(), () => {
+        this.simulator.schedule('Create: ' + this.id, this.distribution.draw(), () => {
             if (this.outputChannels[CreateBlock.OUT] !== null) {
                 this.entityCount++;
                 const entity = new Entity(this.entityCount + '', this.simulator.currentTime);

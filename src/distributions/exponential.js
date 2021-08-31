@@ -1,12 +1,25 @@
+import Distribution from "./distribution.js";
+
 /**
  * An exponential distribution.
- * @param lambda Lambda. The mean, or expected value is 1 / lambda.
- * @param rnd Random number generator.
- * @return {function(): number}
  */
-export const exponential = function(lambda, rnd) {
-    // Source: https://en.wikipedia.org/wiki/Exponential_distribution#Generating_exponential_variates
-    return function() {
-        return -1 * Math.log(rnd()) / lambda;
+export default class Exponential extends Distribution{
+    /**
+     * Constructor.
+     * @param lambda Lambda. The mean, or expected value is 1 / lambda.
+     * @param rnd Random number generator.
+     */
+    constructor(lambda, rnd) {
+        super(rnd);
+        this.lambda = lambda;
+    }
+
+    /**
+     * Draws the next random number.
+     * @return {number}
+     */
+    draw() {
+        // Source: https://en.wikipedia.org/wiki/Exponential_distribution#Generating_exponential_variates
+        return -1 * Math.log(this.rnd()) / this.lambda;
     }
 }

@@ -9,7 +9,7 @@ export default class DelayBlock extends Block {
      * Constructor.
      * @param {string} id ID.
      * @param {Simulator} simulator The simulator.
-     * @param {Function} distribution The distribution function to use.
+     * @param {Distribution} distribution The distribution function to use.
      */
     constructor(id, simulator, distribution) {
         super(id, simulator);
@@ -39,7 +39,7 @@ export default class DelayBlock extends Block {
     receiveEntity(entity, channel = DelayBlock.IN) {
         super.receiveEntity(entity, channel);
         this.entities.push(entity);
-        this.simulator.schedule('Delay: ' + this.id, this.distribution(), ()=> {
+        this.simulator.schedule('Delay: ' + this.id, this.distribution.draw(), ()=> {
             this._removeEntity(entity);
             if (this.outputChannels[DelayBlock.OUT] !== null) {
                 const {nextBlock, inputChannel} = this.outputChannels[DelayBlock.OUT];
