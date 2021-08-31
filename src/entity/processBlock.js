@@ -28,7 +28,7 @@ export default class ProcessBlock extends Block{
      * @param {Entity} entity The entity to receive.
      * @param {number} channel
      */
-    receiveEntity(entity, channel = DelayBlock.IN) {
+    receiveEntity(entity, channel = ProcessBlock.IN) {
         super.receiveEntity(entity, channel);
         this.entities.push(entity);
 
