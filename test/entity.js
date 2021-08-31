@@ -18,8 +18,8 @@ const create01 = new CreateBlock('Create01', simulator, exp1);
 const delay01 = new DelayBlock('Delay01', simulator, tri2);
 const dispose01 = new DisposeBlock('Dispose01', simulator);
 
-create01.setNextBlock(CreateBlock.OUT, delay01);
-delay01.setNextBlock(DelayBlock.OUT, dispose01);
+create01.setNextBlock(delay01);
+delay01.setNextBlock(dispose01);
 
 create01.start();
 simulator.run(() => {

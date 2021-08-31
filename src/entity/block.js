@@ -42,15 +42,15 @@ export default class Block {
 
     /**
      * Set a next block.
-     * @param {number} channel The channel.
      * @param {Block} nextBlock The next block.
+     * @param {number} outputChannel The output channel.
      * @param {number} inputChannel The next block's input channel.
      */
-    setNextBlock(channel, nextBlock, inputChannel = Block.IN) {
-        if (this.outputChannels.hasOwnProperty(channel)) {
-            this.outputChannels[channel] = {nextBlock, inputChannel};
+    setNextBlock(nextBlock, outputChannel = Block.OUT, inputChannel = Block.IN) {
+        if (this.outputChannels.hasOwnProperty(outputChannel)) {
+            this.outputChannels[outputChannel] = {nextBlock, inputChannel};
         } else {
-            throw 'Block ' + this.id + ' does not have channel ' + channel;
+            throw 'Block ' + this.id + ' does not have channel ' + outputChannel;
         }
     }
 
