@@ -20,5 +20,11 @@ process01.setNextBlock(dispose01);
 create01.start();
 simulator.run(() => {
     console.log('Simulation finished');
+
+    // Show stats.
+    const queue = process01.queue;
+    console.log('Average queue length = ' + queue.getAverageQueueLength());
+    console.log('Utilization = ' + queue.getUtilization());
+    console.log('Max queue length = ' + queue.getMaximumQueueLength());
 })
 

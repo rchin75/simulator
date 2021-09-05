@@ -2,6 +2,7 @@ import Block from "./block";
 import Simulator from "../simulator";
 import Distribution from "../distributions/distribution";
 import Entity from "./entity";
+import Queue from "./queue";
 
 /**
  * A process block.
@@ -10,7 +11,7 @@ import Entity from "./entity";
 export default class ProcessBlock extends Block{
     readonly distribution: Distribution;
     public enabled: boolean;
-    public entities: Array<Entity>;
+    readonly _queue: Queue;
 
     /**
      * Constructor.
@@ -27,7 +28,7 @@ export default class ProcessBlock extends Block{
         this.enabled = true;
 
         // The queue of entities waiting to be processed by this block.
-        this.entities = [];
+        this._queue = new Queue(this.simulator);
     }
 
     /**
@@ -37,11 +38,11 @@ export default class ProcessBlock extends Block{
      */
     receiveEntity(entity: Entity, channel: number = ProcessBlock.IN) {
         super.receiveEntity(entity, channel);
-        this.entities.push(entity);
+        this._queue.addEntity(entity);
 
         // Start processing entities when there is one in the queue.
         // When there are more entities in the queue then processing already started.
-        if (this.entities.length === 1) {
+        if (this._queue.length === 1) {
             this._processEntities();
         }
     }
@@ -51,13 +52,10 @@ export default class ProcessBlock extends Block{
      * @private
      */
     _processEntities() {
-        if (this.entities.length > 0) {
+        if (this._queue.length > 0) {
             this.simulator.schedule('Process: ' + this.id, this.distribution.draw(), ()=> {
-                // Note: splice returns the removed entity, but using that one leads to issues
-                // (seems to get garbage collected in Chrome), so we get it separately.
                 // Get the first element from the queue.
-                const entity = this.entities[0];
-                this.entities.splice(0, 1);
+                const entity = this._queue.takeEntity();
 
                 this._pushEntityToNextBlock(entity, ProcessBlock.OUT);
 
@@ -68,9 +66,9 @@ export default class ProcessBlock extends Block{
     }
 
     /**
-     * Gets the current queue length.
+     * Gets the queue.
      */
-    get queueLength() {
-        return this.entities.length;
+    get queue() {
+        return this._queue;
     }
 }
