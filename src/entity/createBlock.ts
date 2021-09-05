@@ -35,8 +35,8 @@ export default class CreateBlock extends Block {
         }
         this.simulator.schedule('Create: ' + this.id, this.distribution.draw(), () => {
             if (this.outputChannels[CreateBlock.OUT] !== null) {
-                this.entityCount++;
-                const entity = new Entity(this.entityCount + '', this.simulator.currentTime);
+                this._totalEntities++;
+                const entity = new Entity(this._totalEntities + '', this.simulator.currentTime);
                 entity.blockIDs.push(this.id);
                 this._pushEntityToNextBlock(entity, CreateBlock.OUT);
             }

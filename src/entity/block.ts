@@ -23,6 +23,7 @@ export default class Block {
     readonly id: string
     readonly simulator: Simulator;
     readonly outputChannels: { [key: number] : OutputChannelData | null};
+    protected _totalEntities: number = 0;
 
     /**
      * Constructor.
@@ -46,6 +47,7 @@ export default class Block {
     receiveEntity(entity: Entity, channel: number) {
         // To be implemented by sub class.
         entity.blockIDs.push(this.id);
+        this._totalEntities++;
     }
 
     /**
@@ -87,5 +89,11 @@ export default class Block {
         }
     }
 
+    /**
+     * Gets the total number of entities received/processed by this block.
+     */
+    get totalEntities() {
+        return this._totalEntities;
+    }
 
 }

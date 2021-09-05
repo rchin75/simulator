@@ -66,4 +66,11 @@ export default class ProcessBlock extends Block{
             })
         }
     }
+
+    /**
+     * Gets the current queue length.
+     */
+    get queueLength() {
+        return this.entities.length;
+    }
 }

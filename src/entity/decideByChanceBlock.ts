@@ -13,6 +13,8 @@ export default class DecideByChanceBlock extends Block {
 
     readonly trueValue: number
     readonly uniform : Uniform;
+    private _trueEntities: number = 0;
+    private _falseEntities: number = 0;
 
     /**
      * Constructor.
@@ -39,8 +41,25 @@ export default class DecideByChanceBlock extends Block {
         const value = this.uniform.draw();
         if (value <= this.trueValue) {
             this._pushEntityToNextBlock(entity, DecideByChanceBlock.OUT_TRUE);
+            this._trueEntities++;
         } else {
             this._pushEntityToNextBlock(entity, DecideByChanceBlock.OUT_FALSE);
+            this._falseEntities++;
         }
     }
+
+    /**
+     * Gets the number of entities evaluated as true.
+     */
+    get trueEntities() {
+        return this._trueEntities;
+    }
+
+    /**
+     * Gets the number of entities evaluated as false.
+     */
+    get falseEntities() {
+        return this._falseEntities;
+    }
+
 }
