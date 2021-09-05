@@ -1,12 +1,5 @@
 
 import {Simulator, Triangular, Normal, Exponential} from '../dist/simulator.js';
-/*
-import Simulator from '../src/simulator.js';
-import '../src/random.js';
-import Triangular from "../src//distributions/triangular.js";
-import Normal from "../src/distributions/normal.js";
-import Exponential from "../src/distributions/exponential.js";
-*/
 
 const simulator = new Simulator(0,10);
 

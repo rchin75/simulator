@@ -2,18 +2,6 @@
 
 import {Simulator, Triangular, Exponential, CreateBlock, DelayBlock, ProcessBlock, DisposeBlock} from '../dist/simulator.js';
 
-/*
-import Simulator from "../src/simulator.js";
-import "../src/random.js";
-import Triangular from "../src/distributions/triangular.js";
-import Exponential from "../src/distributions/exponential.js";
-
-import CreateBlock from "../src/entity/createBlock.js";
-import DelayBlock from "../src/entity/delayBlock.js";
-import ProcessBlock from "../src/entity/processBlock.js";
-import DisposeBlock from "../src/entity/disposeBlock.js";
- */
-
 const rnd = Math.seed(24);
 const simulator = new Simulator(0,60);
 const exp1 = new Exponential(1, rnd);

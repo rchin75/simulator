@@ -1,15 +1,21 @@
-import TimeLine from "./timeline.js";
+import TimeLine from "./timeline";
+import Event from "./event";
 
 /**
  * The simulator.
  */
 export default class Simulator {
+
+    public startTime: number;
+    public endTime: number;
+    public timeLine: TimeLine;
+
     /**
      * Constructor.
      * @param {number} startTime Start time.
      * @param {number} endTime End time.
      */
-    constructor(startTime = 0, endTime = 10) {
+    constructor(startTime: number = 0, endTime: number = 10) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.timeLine = new TimeLine(startTime);
@@ -22,12 +28,12 @@ export default class Simulator {
      * @param {Object=} params Optional parameters.
      * @return {Promise<unknown>}
      */
-    scheduleAsync(name, delay, params) {
-        const promise = (resolve, reject) => {
+    scheduleAsync(name: string, delay: number, params: any) {
+        const promise = (resolve: Function, reject: Function) => {
             this.timeLine.addEvent({
                 name,
                 delay,
-                cb: (result) => {
+                cb: (result: Event) => {
                     resolve(result);
                 },
                 params
@@ -43,7 +49,7 @@ export default class Simulator {
      * @param {Function} cb Callback function.
      * @param {Object=} params Optional parameters.
      */
-    schedule(name, delay, cb, params) {
+    schedule(name: string, delay: number, cb: Function, params: any) {
         this.timeLine.addEvent({
             name,
             delay,
@@ -62,7 +68,7 @@ export default class Simulator {
         if ((events === null) || (this.timeLine.currentTime > this.endTime)) {
             return false;
         }
-        events.forEach(event => {
+        events.forEach((event : Event) => {
             //console.log('Processing event', event.name);
             if (event.cb) {
                 event.cb(event);
@@ -75,7 +81,7 @@ export default class Simulator {
      * Runs the simulation.
      * @param {Function=} done Optional callback function, which will be invoked after completing the run.
      */
-    run(done) {
+    run(done: Function) {
         let goOn = true;
         setTimeout( () => {
             goOn = this._processNextEvents();
@@ -91,7 +97,8 @@ export default class Simulator {
      * Gets the current time.
      * @return {number} The current time.
      */
-    get currentTime() {
+    get currentTime() : number {
         return this.timeLine.currentTime;
     }
+
 }
