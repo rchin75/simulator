@@ -13,6 +13,8 @@ import CreateBlock from "./entity/createBlock";
 import DelayBlock from "./entity/delayBlock";
 import DisposeBlock from "./entity/disposeBlock";
 import ProcessBlock from "./entity/processBlock";
+import DecideByChanceBlock from "./entity/decideByChanceBlock";
+import DecideByExpressionBlock from "./entity/decideByExpressionBlock";
 
 export {
     Simulator,
@@ -27,7 +29,10 @@ export {
     CreateBlock,
     DelayBlock,
     DisposeBlock,
-    ProcessBlock};
+    ProcessBlock,
+    DecideByChanceBlock,
+    DecideByExpressionBlock
+};
 
 
 

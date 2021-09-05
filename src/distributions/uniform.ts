@@ -13,7 +13,7 @@ export default class Uniform extends Distribution{
      * @param {number} to The upper boundary.
      * @param {Function} rnd Random number generator.
      */
-    constructor(from: number, to: number, rnd: Function) {
+    constructor(from: number = 0, to: number = 1, rnd: Function) {
         super(rnd);
         this.from = from;
         this.to = to;
