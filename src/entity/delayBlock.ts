@@ -9,7 +9,7 @@ import Entity from "./entity";
  */
 export default class DelayBlock extends Block {
     readonly distribution: Distribution;
-    readonly entities: Array<Entity>;
+    public entities: Array<Entity>;
 
     /**
      * Constructor.
@@ -19,7 +19,7 @@ export default class DelayBlock extends Block {
      */
     constructor(id: string, simulator: Simulator, distribution: Distribution) {
         super(id, simulator);
-        this.initializeOutputChannel(DelayBlock.OUT);
+        this._initializeOutputChannel(DelayBlock.OUT);
         this.distribution = distribution;
         // Entities in this block.
         this.entities = [];
@@ -47,10 +47,7 @@ export default class DelayBlock extends Block {
         this.entities.push(entity);
         this.simulator.schedule('Delay: ' + this.id, this.distribution.draw(), ()=> {
             this._removeEntity(entity);
-            if (this.outputChannels[DelayBlock.OUT] !== null) {
-                const {nextBlock, inputChannel} = this.outputChannels[DelayBlock.OUT];
-                nextBlock.receiveEntity(entity, inputChannel);
-            }
+            this._pushEntityToNextBlock(entity, DelayBlock.OUT);
         });
     }
 }

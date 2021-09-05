@@ -20,7 +20,7 @@ export default class ProcessBlock extends Block{
      */
     constructor(id: string, simulator: Simulator, distribution: Distribution) {
         super(id, simulator);
-        this.initializeOutputChannel(ProcessBlock.OUT);
+        this._initializeOutputChannel(ProcessBlock.OUT);
         this.distribution = distribution;
 
         // TODO: implement what happens if this value changes.
@@ -59,10 +59,7 @@ export default class ProcessBlock extends Block{
                 const entity = this.entities[0];
                 this.entities.splice(0, 1);
 
-                if (this.outputChannels[ProcessBlock.OUT] !== null) {
-                    const {nextBlock, inputChannel} = this.outputChannels[ProcessBlock.OUT];
-                    nextBlock.receiveEntity(entity, inputChannel);
-                }
+                this._pushEntityToNextBlock(entity, ProcessBlock.OUT);
 
                 // Proceed with the next entity in the queue, if any.
                 this._processEntities();

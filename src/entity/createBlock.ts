@@ -20,7 +20,7 @@ export default class CreateBlock extends Block {
      */
     constructor(id: string, simulator: Simulator, distribution: Distribution) {
         super(id, simulator);
-        this.initializeOutputChannel(CreateBlock.OUT);
+        this._initializeOutputChannel(CreateBlock.OUT);
         this.distribution = distribution;
         this.entityCount = 0;
         this.enabled = true;
@@ -38,8 +38,7 @@ export default class CreateBlock extends Block {
                 this.entityCount++;
                 const entity = new Entity(this.entityCount + '', this.simulator.currentTime);
                 entity.blockIDs.push(this.id);
-                const {nextBlock, inputChannel} = this.outputChannels[CreateBlock.OUT];
-                nextBlock.receiveEntity(entity, inputChannel);
+                this._pushEntityToNextBlock(entity, CreateBlock.OUT);
             }
             this.start();
         }, null);

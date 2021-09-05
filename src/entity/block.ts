@@ -1,9 +1,17 @@
-/**
- * A block (abstract class).
- */
 import Simulator from "../simulator";
 import Entity from "./entity";
 
+/**
+ * Value type for output channels.
+ */
+interface OutputChannelData {
+    nextBlock : Block,
+    inputChannel: number
+}
+
+/**
+ * A block (abstract class).
+ */
 export default class Block {
 
     /** The default input channel/ */
@@ -14,7 +22,7 @@ export default class Block {
 
     readonly id: string
     readonly simulator: Simulator;
-    readonly outputChannels: any;
+    readonly outputChannels: { [key: number] : OutputChannelData | null};
 
     /**
      * Constructor.
@@ -43,10 +51,25 @@ export default class Block {
     /**
      * Initializes the output channel.
      * @param {number} channel The channel.
+     * @private
      */
-    initializeOutputChannel(channel: number) {
+    _initializeOutputChannel(channel: number) {
         if (!this.outputChannels.hasOwnProperty(channel)) {
             this.outputChannels[channel] = null;
+        }
+    }
+
+    /**
+     * Pushes an entity to the next block.
+     * @param entity The entity.
+     * @param outputChannel The output channel of this block to use.
+     * @private
+     */
+    _pushEntityToNextBlock(entity: Entity, outputChannel: number) {
+        const outputChannelData: OutputChannelData | null = this.outputChannels[outputChannel];
+        if (outputChannelData) {
+            const {nextBlock, inputChannel} : OutputChannelData = outputChannelData;
+            nextBlock.receiveEntity(entity, inputChannel);
         }
     }
 
