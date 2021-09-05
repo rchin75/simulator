@@ -2,11 +2,13 @@
  * A distribution (abstract class).
  */
 export default class Distribution {
+    readonly rnd : Function;
+
     /**
      * Constructor.
      * @param {Function} rnd Random number generator.
      */
-    constructor(rnd) {
+    constructor(rnd: Function) {
         if (new.target === Distribution) {
             throw new TypeError("Cannot construct Distribution instances directly");
         }
@@ -17,7 +19,7 @@ export default class Distribution {
      * Draws the next random number.
      * @return {number}
      */
-    draw() {
+    draw() : number {
         return this.rnd();
     }
 }

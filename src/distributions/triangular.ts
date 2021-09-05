@@ -1,9 +1,14 @@
-import Distribution from "./distribution.js";
+import Distribution from "./distribution";
 
 /**
  * A triangular distribution.
  */
 export default class Triangular extends Distribution{
+    readonly a: number;
+    readonly b: number;
+    readonly c: number;
+    readonly f: number;
+
     /**
      * Constructor.
      * @param {number} a Left corner.
@@ -11,7 +16,7 @@ export default class Triangular extends Distribution{
      * @param {number} c Top corner.
      * @param {Function} rnd Random number generator.
      */
-    constructor(a, b, c, rnd) {
+    constructor(a: number, b: number, c: number, rnd: Function) {
         super(rnd);
         this.a = a;
         this.b = b;
@@ -23,7 +28,7 @@ export default class Triangular extends Distribution{
      * Draws the next random number.
      * @return {number}
      */
-    draw() {
+    draw(): number {
         // Source: https://en.wikipedia.org/wiki/Triangular_distribution
         let u = this.rnd();
         let x;

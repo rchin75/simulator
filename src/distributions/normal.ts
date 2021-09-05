@@ -1,16 +1,21 @@
-import Distribution from "./distribution.js";
+import Distribution from "./distribution";
 
 /**
  * A normal distribution.
  */
 export default class Normal extends Distribution{
+    readonly mean: number;
+    readonly stdDev: number;
+    private spare: number;
+    private hasSpare: boolean;
+
     /**
      * Constructor.
      * @param {number} mean Mean.
      * @param {number} stdDev Standard deviation.
      * @param {Function} rnd Random number generator.
      */
-    constructor(mean, stdDev, rnd) {
+    constructor(mean: number, stdDev: number, rnd: Function) {
         super(rnd);
         this.mean = mean;
         this.stdDev = stdDev;
@@ -22,7 +27,7 @@ export default class Normal extends Distribution{
      * Draws the next random number.
      * @return {number}
      */
-    draw() {
+    draw(): number {
         // Source: https://en.wikipedia.org/wiki/Marsaglia_polar_method
         if (this.hasSpare) {
             this.hasSpare = false;
