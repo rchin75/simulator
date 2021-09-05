@@ -1,4 +1,6 @@
-import Block from "./block.js";
+import Block from "./block";
+import Simulator from "../simulator";
+import Entity from "./entity";
 
 /**
  * A dispose-block.
@@ -10,7 +12,7 @@ export default class DisposeBlock extends Block {
      * @param {string} id ID.
      * @param {Simulator} simulator The simulator.
      */
-    constructor(id, simulator) {
+    constructor(id: string, simulator: Simulator) {
         super(id, simulator);
     }
 
@@ -19,7 +21,7 @@ export default class DisposeBlock extends Block {
      * @param {Entity} entity An entity.
      * @param {number} channel The Channel.
      */
-    receiveEntity(entity, channel= DisposeBlock.IN) {
+    receiveEntity(entity: Entity, channel: number= DisposeBlock.IN) {
         super.receiveEntity(entity, channel);
         // To do: keep track of stats before disposing.
         const time = this.simulator.currentTime;

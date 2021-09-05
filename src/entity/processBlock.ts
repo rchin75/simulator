@@ -1,17 +1,24 @@
-import Block from "./block.js";
+import Block from "./block";
+import Simulator from "../simulator";
+import Distribution from "../distributions/distribution";
+import Entity from "./entity";
 
 /**
  * A process block.
  * This block adds entities to a queue and then processes them one by one.
  */
 export default class ProcessBlock extends Block{
+    readonly distribution: Distribution;
+    public enabled: boolean;
+    public entities: Array<Entity>;
+
     /**
      * Constructor.
      * @param {string} id ID.
      * @param {Simulator} simulator The simulator.
      * @param {Distribution} distribution The distribution function to use.
      */
-    constructor(id, simulator, distribution) {
+    constructor(id: string, simulator: Simulator, distribution: Distribution) {
         super(id, simulator);
         this.initializeOutputChannel(ProcessBlock.OUT);
         this.distribution = distribution;
@@ -28,7 +35,7 @@ export default class ProcessBlock extends Block{
      * @param {Entity} entity The entity to receive.
      * @param {number} channel
      */
-    receiveEntity(entity, channel = ProcessBlock.IN) {
+    receiveEntity(entity: Entity, channel: number = ProcessBlock.IN) {
         super.receiveEntity(entity, channel);
         this.entities.push(entity);
 

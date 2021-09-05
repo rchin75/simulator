@@ -28,7 +28,7 @@ export default class Simulator {
      * @param {Object=} params Optional parameters.
      * @return {Promise<unknown>}
      */
-    scheduleAsync(name: string, delay: number, params: any) {
+    scheduleAsync(name: string, delay: number, params?: any) {
         const promise = (resolve: Function, reject: Function) => {
             this.timeLine.addEvent({
                 name,
@@ -49,7 +49,7 @@ export default class Simulator {
      * @param {Function} cb Callback function.
      * @param {Object=} params Optional parameters.
      */
-    schedule(name: string, delay: number, cb: Function, params: any) {
+    schedule(name: string, delay: number, cb: Function, params?: any) {
         this.timeLine.addEvent({
             name,
             delay,

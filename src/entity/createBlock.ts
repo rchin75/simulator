@@ -1,18 +1,24 @@
-import Block from "./block.js";
-import Entity from "./entity.js";
+import Block from "./block";
+import Entity from "./entity";
+import Simulator from "../simulator";
+import Distribution from "../distributions/distribution";
 
 /**
  * A create-block.
  * Creates new entities.
  */
 export default class CreateBlock extends Block {
+    readonly distribution: Distribution;
+    public entityCount: number;
+    public enabled: boolean;
+
     /**
      * Constructor.
      * @param {string} id ID.
      * @param {Simulator} simulator The simulator.
      * @param {Distribution} distribution The distribution function to use.
      */
-    constructor(id, simulator, distribution) {
+    constructor(id: string, simulator: Simulator, distribution: Distribution) {
         super(id, simulator);
         this.initializeOutputChannel(CreateBlock.OUT);
         this.distribution = distribution;
@@ -35,8 +41,8 @@ export default class CreateBlock extends Block {
                 const {nextBlock, inputChannel} = this.outputChannels[CreateBlock.OUT];
                 nextBlock.receiveEntity(entity, inputChannel);
             }
-            this.start(this.simulator);
-        });
+            this.start();
+        }, null);
     }
 }
 
