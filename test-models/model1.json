@@ -1,0 +1,69 @@
+{
+  "name": "model1",
+  "description": "A test model",
+  "simulator": {
+    "startTime": 0,
+    "endTime": 60
+  },
+  "experiments": [
+    {
+      "name": "experiment1",
+      "replications": 1,
+      "initialRandomSeed": 24,
+      "inputData": null,
+      "outputData": null
+    }
+  ],
+  "distributions": [
+    {
+      "name": "exp1",
+      "type": "EXPONENTIAL",
+      "params": [1]
+    },
+    {
+      "name": "tri2",
+      "type": "TRIANGULAR",
+      "params": [10, 20, 15]
+    },
+    {
+      "name": "tri3",
+      "type": "TRIANGULAR",
+      "params": [1, 4, 7]
+    }
+  ],
+  "blocks": [
+    {
+      "name": "create1",
+      "type": "CREATE",
+      "distribution": "exp1"
+    },
+    {
+      "name": "delay1",
+      "type": "DELAY",
+      "distribution": "tri2"
+    },
+    {
+      "name": "process1",
+      "type": "PROCESS",
+      "distribution": "tri3"
+    },
+    {
+      "name": "dispose1",
+      "type": "DISPOSE"
+    }
+  ],
+  "logic": [
+    {
+      "block": "create1",
+      "next": "delay1"
+    },
+    {
+      "block": "delay1",
+      "next": "process1"
+    },
+    {
+      "block": "process1",
+      "next": "dispose1"
+    }
+  ]
+}
